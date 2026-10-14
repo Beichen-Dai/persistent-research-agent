@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# Environments
+.venv/
+venv/
+.env
+.env.*
+
+# Tools
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local agent data and personal configuration (never commit these)
+agent-data/
+workspace/
+research-agent.toml
+core_notes.md
+*.sqlite
+*.db
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store

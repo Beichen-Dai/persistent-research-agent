@@ -1,0 +1,56 @@
+# Persistent Research Agent configuration.
+# Relative paths are resolved against the directory of this file.
+# The API key is NEVER stored here: [llm] api_key_env names the environment
+# variable that holds it.
+
+[paths]
+data_dir = "agent-data"        # projects, sessions, indexes, knowledge cards
+workspace = "workspace"        # working directory of run_python
+core_notes = "core_notes.md"   # optional notes sent with every request
+
+[llm]
+# Any OpenAI-compatible chat-completions endpoint works.
+base_url = "https://api.deepseek.com"
+model = "deepseek-v4-flash"
+api_key_env = "DEEPSEEK_API_KEY"
+# card_model = "deepseek-v4-flash"   # model for knowledge cards (default: model)
+
+[agent]
+max_recent_messages = 40       # messages sent in full; older ones become a digest
+max_digest_chars = 30000
+max_tool_chars = 20000         # tool outputs are clipped to this size
+run_python_timeout = 120       # seconds before run_python continues in the background
+auto_cards = 3                 # knowledge cards attached automatically per message
+# card_keyword_languages = ["Chinese"]   # extra keyword languages for cross-language matching
+
+# ---------------------------------------------------------------------------
+# Data sources. Remove the examples you do not need, or add your own:
+#
+#   [[sources]]
+#   name = "my_db"
+#   type = "my_package.my_module:MySource"   # your DataSource subclass
+#   description = "What the model will find here"
+#   any_other_option = "passed to MySource.__init__"
+#
+# See docs/data-sources.md.
+# ---------------------------------------------------------------------------
+
+[[sources]]
+name = "papers"
+type = "pdf_folder"
+path = "~/Zotero/storage"
+description = "My reference library (PDF)"
+
+[[sources]]
+name = "notes"
+type = "text_folder"
+path = "notes"
+patterns = ["*.md", "*.txt"]
+description = "My research notes"
+enabled = false
+
+# [[sources]]
+# name = "lammps"
+# type = "lammps_docs"
+# path = "~/src/lammps-22Jul2025"
+# script_dirs = ["workspace"]
